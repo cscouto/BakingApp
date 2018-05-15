@@ -1,9 +1,11 @@
 package com.coutocode.bakingapp.model;
 
+import com.coutocode.bakingapp.step.RecipeStep;
+
 import java.util.List;
 
 public class Recipe {
-    int id;
+    public int id;
     String name;
     List<Ingredient> ingredients;
     List<RecipeStep> steps;

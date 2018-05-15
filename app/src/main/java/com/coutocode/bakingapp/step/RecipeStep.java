@@ -1,4 +1,4 @@
-package com.coutocode.bakingapp.model;
+package com.coutocode.bakingapp.step;
 
 public class RecipeStep {
     int id;
