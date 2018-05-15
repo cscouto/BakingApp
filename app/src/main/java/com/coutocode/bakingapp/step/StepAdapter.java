@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.coutocode.bakingapp.R;
-import com.coutocode.bakingapp.model.Recipe;
+import com.coutocode.bakingapp.recipe.Recipe;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recipe_list_content, parent, false);
+                .inflate(R.layout.step_list_content, parent, false);
         return new ViewHolder(view);
     }
 

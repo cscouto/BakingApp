@@ -1,6 +1,6 @@
 package com.coutocode.bakingapp.api;
 
-import com.coutocode.bakingapp.model.Recipe;
+import com.coutocode.bakingapp.recipe.Recipe;
 
 import java.util.List;
 

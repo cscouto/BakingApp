@@ -1,4 +1,4 @@
-package com.coutocode.bakingapp.model;
+package com.coutocode.bakingapp.recipe;
 
 import com.coutocode.bakingapp.step.RecipeStep;
 
