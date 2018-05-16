@@ -7,22 +7,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.coutocode.bakingapp.R;
 import com.coutocode.bakingapp.recipe.Recipe;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
     private final StepListActivity mParentActivity;
-    private final List<Recipe> mValues;
+    private final List<RecipeStep> mValues;
     private final boolean mTwoPane;
 
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Recipe item = (Recipe) view.getTag();
+            RecipeStep item = (RecipeStep) view.getTag();
             if (mTwoPane) {
                 Bundle arguments = new Bundle();
                 arguments.putString(StepDetailFragment.ARG_ITEM_ID, String.valueOf(item.id));
@@ -41,7 +45,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
         }
     };
 
-    StepAdapter(StepListActivity parent, List<Recipe> items, boolean twoPane) {
+    StepAdapter(StepListActivity parent, List<RecipeStep> items, boolean twoPane) {
         mValues = items;
         mParentActivity = parent;
         mTwoPane = twoPane;
@@ -56,7 +60,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-
+        holder.onBind(mValues.get(position).shortDescription);
     }
 
     @Override
@@ -65,9 +69,16 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tvDescription)
+        TextView tvDescription;
 
         ViewHolder(View view) {
             super(view);
+            ButterKnife.bind(this, itemView);
+        }
+
+        public void onBind(String description){
+            tvDescription.setText(description);
         }
     }
 }

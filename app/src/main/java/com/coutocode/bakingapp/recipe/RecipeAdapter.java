@@ -1,5 +1,12 @@
 package com.coutocode.bakingapp.recipe;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coutocode.bakingapp.R;
+import com.coutocode.bakingapp.step.StepListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,16 +27,28 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
+
     private final List<Recipe> mValues;
+    final RecipeListActivity activity;
 
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Context context = view.getContext();
+            Intent intent = new Intent(context, StepListActivity.class);
+            String transitionName = context.getString(R.string.transition_string);
+            ActivityOptionsCompat options =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+                            view,
+                            transitionName
+                    );
+            ActivityCompat.startActivity(context, intent, options.toBundle());
         }
     };
 
-    RecipeAdapter(List<Recipe> items) {
+    RecipeAdapter(List<Recipe> items, RecipeListActivity activity) {
         mValues = items;
+        this.activity = activity;
     }
 
     @Override
@@ -49,6 +69,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.cardView)
+        CardView cardView;
         @BindView(R.id.ivRecipe)
         ImageView ivRecipe;
         @BindView(R.id.tvTitle)
@@ -67,6 +89,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            cardView.setOnClickListener(mOnClickListener);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(itemView.getContext());
             rvIngredients.setLayoutManager(layoutManager);
         }

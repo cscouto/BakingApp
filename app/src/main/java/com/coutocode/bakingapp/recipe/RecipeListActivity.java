@@ -7,7 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.AutoTransition;
+import android.transition.ChangeBounds;
+import android.transition.ChangeImageTransform;
+import android.transition.Explode;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.coutocode.bakingapp.R;
@@ -66,7 +71,7 @@ public class RecipeListActivity extends AppCompatActivity {
     }
 
     private void setUpList(List<Recipe> recipes){
-        rvRecipe.setAdapter(new RecipeAdapter(recipes));
+        rvRecipe.setAdapter(new RecipeAdapter(recipes, this));
     }
 
 }

@@ -10,4 +10,5 @@
     <string name="ingredients_upper">Ingredients</string>
     <string name="expand">Expand</string>
     <string name="collapse">Collapse</string>
+    <string name="transition_string">transitionShared</string>
 </resources>
