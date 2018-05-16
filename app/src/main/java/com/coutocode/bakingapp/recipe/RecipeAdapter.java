@@ -1,11 +1,13 @@
 package com.coutocode.bakingapp.recipe;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coutocode.bakingapp.R;
@@ -57,10 +59,16 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         Button btnExpand;
         @BindView(R.id.rvIngredients)
         RecyclerView rvIngredients;
+        @BindView(R.id.layout_list)
+        LinearLayout layout_list;
+
+        boolean isColapsed = true;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(itemView.getContext());
+            rvIngredients.setLayoutManager(layoutManager);
         }
 
         public void onBind(Recipe recipe){
@@ -79,6 +87,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                     .append(" ")
                     .append(itemView.getResources().getString(R.string.servings));
             tvDescription.setText(sb);
+            rvIngredients.setAdapter(new IngredientAdapter(recipe.ingredients));
+
+            btnExpand.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isColapsed){
+                        layout_list.setVisibility(View.VISIBLE);
+                        btnExpand.setText(R.string.collapse);
+                    }else{
+                        layout_list.setVisibility(View.GONE);
+                        btnExpand.setText(R.string.expand);
+                    }
+                    isColapsed = !isColapsed;
+                }
+            });
         }
     }
 }

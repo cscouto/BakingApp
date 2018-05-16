@@ -6,4 +6,8 @@
     <string name="request_failed">Requested has failed.</string>
     <string name="servings">servings</string>
     <string name="my_recipes">My recipes</string>
+    <string name="ingredients">ingredients</string>
+    <string name="ingredients_upper">Ingredients</string>
+    <string name="expand">Expand</string>
+    <string name="collapse">Collapse</string>
 </resources>
