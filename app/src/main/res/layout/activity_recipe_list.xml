@@ -20,6 +20,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_recipe_list" />
+    <include
+        android:id="@+id/rvRecipe"
+        layout="@layout/content_recipe_list" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -8,4 +8,9 @@
     <dimen name="card_min_height">100dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="card_padding">8dp</dimen>
+    <dimen name="card_image_height">160dp</dimen>
+    <dimen name="margin_bottom">8dp</dimen>
+    <dimen name="card_title_text_size">18sp</dimen>
+    <dimen name="layout_margin">16dp</dimen>
+    <dimen name="layout_padd_16dp">16dp</dimen>
 </resources>

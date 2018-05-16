@@ -11,14 +11,14 @@ import retrofit2.Retrofit;
 public class RecipeService {
     RecipeAPI api;
 
-    RecipeService(){
+    public RecipeService(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .build();
         api = retrofit.create(RecipeAPI.class);
     }
 
-    Call<List<Recipe>> listRecipes() {
+    public Call<List<Recipe>> listRecipes() {
         return api.listRecipe();
     }
 }
