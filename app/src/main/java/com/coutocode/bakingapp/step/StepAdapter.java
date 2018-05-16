@@ -38,8 +38,6 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
             } else {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, StepDetailActivity.class);
-                intent.putExtra(StepDetailFragment.ARG_ITEM_ID, item.id);
-
                 context.startActivity(intent);
             }
         }
@@ -75,6 +73,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, itemView);
+            view.setOnClickListener(mOnClickListener);
         }
 
         public void onBind(String description){

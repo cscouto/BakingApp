@@ -36,6 +36,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         public void onClick(View view) {
             Context context = view.getContext();
             Intent intent = new Intent(context, StepListActivity.class);
+            intent.putParcelableArrayListExtra(context.getString(R.string.extra_recipe),
+                    mValues.get((Integer) view.getTag()).steps);
             String transitionName = context.getString(R.string.transition_string);
             ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
@@ -60,7 +62,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.onBind(mValues.get(position));
+        holder.onBind(mValues.get(position), position);
     }
 
     @Override
@@ -94,7 +96,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             rvIngredients.setLayoutManager(layoutManager);
         }
 
-        public void onBind(Recipe recipe){
+        public void onBind(Recipe recipe, int position){
+
+            cardView.setTag(position);
 
             if (!recipe.image.isEmpty()) {
                 Picasso.with(itemView.getContext())

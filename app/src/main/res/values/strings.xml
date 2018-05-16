@@ -11,4 +11,5 @@
     <string name="expand">Expand</string>
     <string name="collapse">Collapse</string>
     <string name="transition_string">transitionShared</string>
+    <string name="extra_recipe">EXTRA_RECIPE</string>
 </resources>
