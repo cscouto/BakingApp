@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coutocode.bakingapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-
+        holder.onBind(mValues.get(position));
     }
 
     @Override
@@ -63,8 +64,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         }
 
         public void onBind(Recipe recipe){
+
+            if (!recipe.image.isEmpty()) {
+                Picasso.with(itemView.getContext())
+                        .load(recipe.image)
+                        .placeholder(R.drawable.ingredients)
+                        .error(R.drawable.ingredients)
+                        .into(ivRecipe);
+            }
+
             tvTitle.setText(recipe.name);
-            tvDescription.setText(recipe.servings);
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.valueOf(recipe.servings))
+                    .append(" ")
+                    .append(itemView.getResources().getString(R.string.servings));
+            tvDescription.setText(sb);
         }
     }
 }
