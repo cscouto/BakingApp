@@ -26,18 +26,17 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            RecipeStep item = (RecipeStep) view.getTag();
             if (mTwoPane) {
-                Bundle arguments = new Bundle();
-                arguments.putString(StepDetailFragment.ARG_ITEM_ID, String.valueOf(item.id));
                 StepDetailFragment fragment = new StepDetailFragment();
-                fragment.setArguments(arguments);
+                fragment.step = mValues.get((Integer) view.getTag());
                 mParentActivity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.recipe_detail_container, fragment)
                         .commit();
             } else {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, StepDetailActivity.class);
+                intent.putExtra(view.getResources().getString(R.string.extra_step),
+                        mValues.get((Integer) view.getTag()));
                 context.startActivity(intent);
             }
         }
@@ -58,7 +57,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.onBind(mValues.get(position).shortDescription);
+        holder.onBind(mValues.get(position).shortDescription, position);
     }
 
     @Override
@@ -73,10 +72,11 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, itemView);
-            view.setOnClickListener(mOnClickListener);
+            itemView.setOnClickListener(mOnClickListener);
         }
 
-        public void onBind(String description){
+        public void onBind(String description, int position){
+            itemView.setTag(position);
             tvDescription.setText(description);
         }
     }

@@ -42,8 +42,24 @@ public class StepListActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvStep.setLayoutManager(layoutManager);
 
-        mValues = getIntent().getParcelableArrayListExtra(getString(R.string.extra_recipe));
+        if (savedInstanceState != null) {
+            mValues = savedInstanceState.getParcelableArrayList(getString(R.string.extra_recipe));
+        }else{
+            mValues = getIntent().getParcelableArrayListExtra(getString(R.string.extra_recipe));
+        }
 
         rvStep.setAdapter(new StepAdapter(this, mValues, mTwoPane));
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(getString(R.string.extra_recipe), mValues);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        mValues = savedInstanceState.getParcelableArrayList(getString(R.string.extra_recipe));
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }

@@ -12,4 +12,5 @@
     <string name="collapse">Collapse</string>
     <string name="transition_string">transitionShared</string>
     <string name="extra_recipe">EXTRA_RECIPE</string>
+    <string name="extra_step">EXTRA_STEP</string>
 </resources>
