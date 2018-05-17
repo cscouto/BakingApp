@@ -16,6 +16,7 @@ import com.coutocode.bakingapp.R;
 public class StepDetailActivity extends AppCompatActivity {
 
     RecipeStep step;
+    StepDetailFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +33,14 @@ public class StepDetailActivity extends AppCompatActivity {
         }
 
         if (savedInstanceState == null) {
-            StepDetailFragment fragment = new StepDetailFragment();
+            fragment = new StepDetailFragment();
             fragment.step = step;
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.recipe_detail_container, fragment)
                     .commit();
+        }else {
+            fragment = (StepDetailFragment) getSupportFragmentManager().getFragment(savedInstanceState,
+                    getString(R.string.extra_fragment));
         }
     }
 
@@ -44,9 +48,18 @@ public class StepDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
+            if (fragment != null) {
+                fragment.pressedBack();
+            }
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        getSupportFragmentManager().putFragment(outState, getString(R.string.extra_fragment), fragment);
+        super.onSaveInstanceState(outState);
     }
 }

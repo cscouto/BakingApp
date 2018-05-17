@@ -13,4 +13,6 @@
     <string name="transition_string">transitionShared</string>
     <string name="extra_recipe">EXTRA_RECIPE</string>
     <string name="extra_step">EXTRA_STEP</string>
+    <string name="baking_app">BakingApp</string>
+    <string name="extra_fragment">EXTRA_FRAGMENT</string>
 </resources>
