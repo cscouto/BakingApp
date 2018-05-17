@@ -10,19 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.coutocode.bakingapp.R;
-import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.LoadControl;
+import com.coutocode.bakingapp.util.ExoPlayerHandler;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.hls.HlsMediaSource;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +24,6 @@ public class StepDetailFragment extends Fragment {
     @BindView(R.id.tvDescription)
     TextView tvDescription;
 
-    SimpleExoPlayer exoPlayer;
     RecipeStep step;
 
     @Override
@@ -52,7 +41,6 @@ public class StepDetailFragment extends Fragment {
             step = savedInstanceState.getParcelable(getString(R.string.extra_step));
         }
 
-        initializePlayer(step.videoURL);
         tvDescription.setText(step.description);
         return rootView;
     }
@@ -64,29 +52,27 @@ public class StepDetailFragment extends Fragment {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        releasePLayer();
-    }
-
-    private void initializePlayer(String url){
-        if (exoPlayer == null){
-            TrackSelector trackSelector = new DefaultTrackSelector();
-            LoadControl loadControl = new DefaultLoadControl();
-            exoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
-            playerView.setPlayer(exoPlayer);
-            MediaSource mediaSource = new ExtractorMediaSource(Uri.parse(url),
-                   new DefaultDataSourceFactory(getContext(),Util.getUserAgent(getContext(),
-                           "BakingApp")),
-                    new DefaultExtractorsFactory(), null, null);
-            exoPlayer.prepare(mediaSource);
-            exoPlayer.setPlayWhenReady(false);
+    public void onResume(){
+        super.onResume();
+        if (!step.videoURL.isEmpty()) {
+            ExoPlayerHandler.getInstance()
+                    .prepareExoPlayerForUri(getContext(),
+                            Uri.parse(step.videoURL), playerView);
+            ExoPlayerHandler.getInstance().goToForeground();
+        }else{
+            playerView.setVisibility(View.GONE);
         }
     }
 
-    private void releasePLayer(){
-        exoPlayer.stop();
-        exoPlayer.release();
-        exoPlayer = null;
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        ExoPlayerHandler.getInstance().goToBackground();
+    }
+
+
+    public void pressedBack(){
+        ExoPlayerHandler.getInstance().releaseVideoPlayer();
     }
 }
