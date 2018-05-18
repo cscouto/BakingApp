@@ -3,7 +3,7 @@ package com.coutocode.bakingapp.recipe;
 public class Ingredient {
     float quantity;
     String measure;
-    String ingredient;
+    public String ingredient;
 
     Ingredient(float quantity, String measure, String ingredient){
         this.quantity = quantity;

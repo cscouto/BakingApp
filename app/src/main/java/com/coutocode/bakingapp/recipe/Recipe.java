@@ -8,7 +8,7 @@ import java.util.List;
 public class Recipe {
     public int id;
     String name;
-    List<Ingredient> ingredients;
+    public List<Ingredient> ingredients;
     ArrayList<RecipeStep> steps;
     int servings;
     String image;
