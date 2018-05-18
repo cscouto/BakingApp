@@ -8,7 +8,7 @@ import retrofit2.Call;
 
 import retrofit2.http.GET;
 
-public interface RecipeAPI {
+interface RecipeAPI {
     @GET("baking.json")
     Call<List<Recipe>> listRecipe();
 }

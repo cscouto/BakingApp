@@ -4,11 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class RecipeStep implements Parcelable {
-    int id;
-    String shortDescription;
-    String description;
-    String videoURL;
-    String thumbnailURL;
+    final int id;
+    final String shortDescription;
+    final String description;
+    final String videoURL;
+    final String thumbnailURL;
 
     RecipeStep(int id, String shortDescription, String description, String videoURL,
                String thumbnailURL){

@@ -2,7 +2,6 @@ package com.coutocode.bakingapp.step;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.coutocode.bakingapp.R;
-import com.coutocode.bakingapp.recipe.Recipe;
 
 import java.util.List;
 
@@ -75,7 +73,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
             itemView.setOnClickListener(mOnClickListener);
         }
 
-        public void onBind(String description, int position){
+        void onBind(String description, int position){
             itemView.setTag(position);
             tvDescription.setText(description);
         }

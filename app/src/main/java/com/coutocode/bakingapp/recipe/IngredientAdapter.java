@@ -44,12 +44,12 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
         TextView tvMeasure;
 
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void onBind(Ingredient ingredient){
+        void onBind(Ingredient ingredient){
             tvIngredient.setText(ingredient.ingredient);
             tvQuantity.setText(String.valueOf(ingredient.quantity));
             tvMeasure.setText(String.valueOf(ingredient.measure));

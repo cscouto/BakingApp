@@ -4,20 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.AutoTransition;
-import android.transition.ChangeBounds;
-import android.transition.ChangeImageTransform;
-import android.transition.Explode;
-import android.view.View;
-import android.view.Window;
 import android.widget.Toast;
 
 import com.coutocode.bakingapp.R;
@@ -41,18 +30,17 @@ public class RecipeListActivity extends AppCompatActivity {
     @BindView(R.id.rvRecipe)
     RecyclerView rvRecipe;
 
-    RecipeService service;
+    private RecipeService service;
 
     @Nullable
     private SimpleIdlingResource mIdlingResource;
 
     @VisibleForTesting
     @NonNull
-    public IdlingResource getIdlingResource() {
+    private void getIdlingResource() {
         if (mIdlingResource == null) {
             mIdlingResource = new SimpleIdlingResource();
         }
-        return mIdlingResource;
     }
 
     @Override
@@ -60,7 +48,7 @@ public class RecipeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this, this);

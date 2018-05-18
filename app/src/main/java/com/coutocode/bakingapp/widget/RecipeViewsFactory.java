@@ -3,7 +3,6 @@ package com.coutocode.bakingapp.widget;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 import android.widget.Toast;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 import com.coutocode.bakingapp.R;
 import com.coutocode.bakingapp.api.RecipeService;
 import com.coutocode.bakingapp.recipe.Recipe;
-import com.coutocode.bakingapp.recipe.RecipeListActivity;
 
 import java.util.List;
 
@@ -19,17 +17,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecipeViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+class RecipeViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    List<Recipe> items;
-    RecipeService service;
+    private List<Recipe> items;
+    private RecipeService service;
 
     private Context mContext = null;
-    private int appWidgetId;
 
     public RecipeViewsFactory(Context ctxt, Intent intent) {
         this.mContext = ctxt;
-        appWidgetId=intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+        int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 

@@ -1,7 +1,5 @@
 package com.coutocode.bakingapp.recipe;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
@@ -29,7 +27,7 @@ import butterknife.ButterKnife;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     private final List<Recipe> mValues;
-    final RecipeListActivity activity;
+    private final RecipeListActivity activity;
 
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
@@ -88,7 +86,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         boolean isColapsed = true;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             cardView.setOnClickListener(mOnClickListener);
@@ -96,7 +94,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             rvIngredients.setLayoutManager(layoutManager);
         }
 
-        public void onBind(Recipe recipe, int position){
+        void onBind(Recipe recipe, int position){
 
             cardView.setTag(position);
 

@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe {
-    public int id;
-    String name;
-    public List<Ingredient> ingredients;
-    ArrayList<RecipeStep> steps;
-    int servings;
-    String image;
+    private final int id;
+    final String name;
+    public final List<Ingredient> ingredients;
+    final ArrayList<RecipeStep> steps;
+    final int servings;
+    final String image;
 
     Recipe(int id, String name, List<Ingredient> ingredients, List<RecipeStep> steps,
            int servings, String image){

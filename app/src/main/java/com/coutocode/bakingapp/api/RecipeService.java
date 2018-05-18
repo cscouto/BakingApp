@@ -10,7 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RecipeService {
-    RecipeAPI api;
+    private final RecipeAPI api;
 
     public RecipeService(){
         Retrofit retrofit = new Retrofit.Builder()

@@ -1,9 +1,9 @@
 package com.coutocode.bakingapp.recipe;
 
 public class Ingredient {
-    float quantity;
-    String measure;
-    public String ingredient;
+    final float quantity;
+    final String measure;
+    public final String ingredient;
 
     Ingredient(float quantity, String measure, String ingredient){
         this.quantity = quantity;

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.coutocode.bakingapp.R;
 import com.coutocode.bakingapp.util.ExoPlayerHandler;
-import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 
 import butterknife.BindView;
@@ -25,11 +24,6 @@ public class StepDetailFragment extends Fragment {
     TextView tvDescription;
 
     RecipeStep step;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
