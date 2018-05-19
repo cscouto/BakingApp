@@ -1,5 +1,7 @@
 package com.coutocode.bakingapp.step;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 import com.coutocode.bakingapp.R;
 import com.coutocode.bakingapp.util.ExoPlayerHandler;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,11 +35,32 @@ public class StepDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.step_detail, container, false);
         ButterKnife.bind(this, rootView);
 
+
         if (savedInstanceState != null){
             step = savedInstanceState.getParcelable(getString(R.string.extra_step));
         }
 
         tvDescription.setText(step.description);
+        if (!step.thumbnailURL.isEmpty()) {
+            Picasso.with(getContext())
+                    .load(step.thumbnailURL)
+                    .into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            playerView.setDefaultArtwork(bitmap);
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
+                    });
+        }
         return rootView;
     }
 

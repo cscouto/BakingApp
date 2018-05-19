@@ -8,8 +8,14 @@ import android.view.MenuItem;
 
 import com.coutocode.bakingapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class StepDetailActivity extends AppCompatActivity {
+
+    @BindView(R.id.detail_toolbar)
+    Toolbar toolbar;
 
     private RecipeStep step;
     private StepDetailFragment fragment;
@@ -18,7 +24,8 @@ public class StepDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_detail);
-        Toolbar toolbar = findViewById(R.id.detail_toolbar);
+
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
 
